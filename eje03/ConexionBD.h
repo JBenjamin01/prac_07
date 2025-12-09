@@ -30,18 +30,18 @@ public:
             std::cout << "Intentando conectar a la BD...\n";
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             conectado = true;
-            std::cout << "Conexión establecida.\n";
+            std::cout << "Conexion establecida.\n";
         } else {
-            std::cout << "Ya existe una conexión activa.\n";
+            std::cout << "Ya existe una conexion activa.\n";
         }
     }
 
     void desconectar() {
         if (conectado) {
             conectado = false;
-            std::cout << "Conexión cerrada.\n";
+            std::cout << "Conexion cerrada.\n";
         } else {
-            std::cout << "No hay conexión activa.\n";
+            std::cout << "No hay conexion activa.\n";
         }
     }
 
