@@ -1,0 +1,45 @@
+# Compilados / ejecutables
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+*.dll
+
+# Carpeta build
+build/
+Build/
+cmake-build-debug/
+cmake-build-release/
+
+# Archivos de CMake generados
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Archivos temporales
+*.tmp
+*.log
+*.bak
+*.swp
+
+# Archivos de editores
+# VSCode
+.vscode/
+# CLion
+.idea/
+# Visual Studio
+*.sdf
+*.pdb
+*.opensdf
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos generados por pruebas
+*.test
+*.gcda
+*.gcno
