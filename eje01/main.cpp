@@ -10,6 +10,6 @@ int main() {
     auto* cfg2 = Configuracion::getInstancia();
     cfg2->mostrarConfiguracion();
 
-    std::cout << "¿Es la misma instancia? "
+    std::cout << "Es la misma instancia? "
             << (cfg1 == cfg2 ? "Sí" : "No") << "\n";
 }
