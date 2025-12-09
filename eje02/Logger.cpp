@@ -31,7 +31,7 @@ public:
 
         archivo << "[" << buffer << "] " << mensaje << endl;
     }
-    
+};    
 
 Logger* Logger::instancia = nullptr;
 
@@ -44,13 +44,12 @@ void funcionB() {
 }
 
 int main() {
-    Logger::getInstance()->log("Inicio del programa");
+    Logger::getInstance()->log("Inicio");
     funcionA();
     funcionB();
-    Logger::getInstance()->log("Fin del programa");
+    Logger::getInstance()->log("Fin");
 
     cout << "Logs escritos en bitacora.log" << endl;
     return 0;
 }
 
-};
