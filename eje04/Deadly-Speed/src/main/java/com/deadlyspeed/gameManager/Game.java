@@ -19,7 +19,10 @@ public class Game {
   private Player playerBlue, playerRed;
 
   public Game(String playerBlue, String playerRed, Stage stage) {
-    // We create the random game that we have implemented
+    // Inicializar el estado del juego con Singleton
+    ControlJuego.getInstance().iniciarJuego(playerBlue, playerRed);
+    
+    // Creamos el juego aleatorio que hemos implementado
     RandomPlay randomPlay = new RandomPlay(playerBlue, playerRed);
     RandomBattle randomBattle = new RandomBattle();
     Scene game = randomPlay.game(randomBattle);
@@ -27,11 +30,11 @@ public class Game {
     game.getStylesheets().add("/styles/game.css");
     stage.setScene(game);
 
-    // Thread to check if any list is empty, if this is the case, then there is a winning player
+    // Hilo para verificar si alguna lista está vacía; si esto ocurre, entonces hay un jugador ganador
     Thread gameOver = new Thread(() -> {
       while (!randomPlay.gameOver()) {
         try {
-          Thread.sleep(1000);     // default daemon timeout
+          Thread.sleep(1000);     
         } catch(InterruptedException e) {
           e.printStackTrace();
         }
@@ -39,7 +42,6 @@ public class Game {
 
       String winner = randomPlay.getPlayerCurrent();
 
-      // We have to redirect to the specific thread of the GUI.
       Platform.runLater(() -> showVictory(winner, stage));
     });
 
@@ -58,6 +60,10 @@ public class Game {
 
     Text win = new Text("You won, " + winner + "!");
 
+    // Mostrar el estado del juego desde el Singleton
+    Text gameState = new Text(ControlJuego.getInstance().getEstadoJuego());
+    gameState.getStyleClass().add("report");
+
     Text isLeague = new Text("Venture into the champions league");
     isLeague.getStyleClass().add("report");
 
@@ -66,14 +72,17 @@ public class Game {
 
     // Tenemos la opcion de jugar otra partida
     Button newGame = new Button("New game");
-    newGame.setOnAction(e -> stage.setScene(Lobby.getInstance(stage).getMainLobby()));
+    newGame.setOnAction(e -> {
+      ControlJuego.getInstance().reiniciarJuego();
+      stage.setScene(Lobby.getInstance(stage).getMainLobby());
+    });
 
     // Tambien podemos abandonar el juego
     Button quit = new Button("Exit game");
     quit.setOnAction(e -> stage.close());
 
     VBox vbox = new VBox();
-    vbox.getChildren().addAll(win, isLeague, newGame, quit);
+    vbox.getChildren().addAll(win, gameState, isLeague, newGame, quit);
     vbox.setAlignment(Pos.CENTER);
 
     // Crear la escena de victoria
