@@ -2,3 +2,4 @@
 
 ConexionBD* ConexionBD::instancia = nullptr;
 std::mutex ConexionBD::mtx;
+std::mutex ConexionBD::printMtx;
